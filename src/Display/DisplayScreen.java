@@ -6,6 +6,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import Game.Entities.Dynamic.Player;
+
 /**
  * Created by AlexVR on 7/1/2018.
  */
@@ -13,7 +15,7 @@ import javax.swing.*;
 public class DisplayScreen {
 
     private JFrame frame;
-    private Canvas canvas;
+    public Canvas canvas;
     private String title;
     private int width, height;
 
@@ -31,7 +33,7 @@ public class DisplayScreen {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setBackground(new Color(188,143,143));
+        frame.setBackground(new Color(147,112,219));
 
         try {
             frame.setIconImage(ImageIO.read(new File("res/Sheets/icon.png")));
@@ -44,7 +46,7 @@ public class DisplayScreen {
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
-        canvas.setBackground(new Color(188,143,143));
+        canvas.setBackground(new Color(147,112,219));
 
         frame.add(canvas);
         frame.pack();

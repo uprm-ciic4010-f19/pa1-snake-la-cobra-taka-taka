@@ -36,7 +36,7 @@ public class Apple {
     	}
     	
     	if(!isGood)
-    		appleColor=Color.GRAY;
+    		appleColor=new Color(165,42,42);
     	
     }
 

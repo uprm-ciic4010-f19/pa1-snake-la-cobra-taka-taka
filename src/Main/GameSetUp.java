@@ -1,6 +1,7 @@
 package Main;
 
 import Display.DisplayScreen;
+import Game.GameStates.GameOverState;
 import Game.GameStates.GameState;
 import Game.GameStates.MenuState;
 import Game.GameStates.PauseState;
@@ -22,7 +23,7 @@ import java.io.InputStream;
  */
 
 public class GameSetUp implements Runnable {
-    private DisplayScreen display;
+    public DisplayScreen display;
     private int width, height;
     public String title;
 
@@ -80,6 +81,7 @@ public class GameSetUp implements Runnable {
         handler = new Handler(this);
 
         gameState = new GameState(handler);
+        gameOverState = new GameOverState(handler);
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
 

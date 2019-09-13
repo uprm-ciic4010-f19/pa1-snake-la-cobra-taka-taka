@@ -14,10 +14,13 @@ import Game.GameStates.State;
 public class Player {
 
 	public int lenght;
+	public Color color;
+	public static Color backgroundColor;
 
 	public boolean justAte;
 	public int scoreCounter;
 	public int applesCounter;
+	public int levelCounter;
 	public int rottenApplesCounter;
 
 	private Handler handler;
@@ -42,10 +45,27 @@ public class Player {
 		scoreCounter=0;
 		applesCounter=0;
 		rottenApplesCounter=0;
+		color = Color.WHITE;
+		backgroundColor = new Color(147,112,219);
+		levelCounter=1;
 
 	}
 
 	public void tick(){
+
+		if(lenght>2&&lenght<4) {
+			color=Color.GREEN;
+			backgroundColor=new Color(188,143,143);
+			levelCounter=2;
+			handler.getGame().display.canvas.setBackground(backgroundColor);
+		}
+		if(lenght>5) {
+			color=Color.DARK_GRAY;
+			backgroundColor=new Color(230,230,250);
+			levelCounter=3;
+			handler.getGame().display.canvas.setBackground(backgroundColor);
+		}
+
 		if(!handler.getWorld().body.isEmpty()) {
 			for(int i =0; i<handler.getWorld().body.size(); i++) {
 				if(xCoord == handler.getWorld().body.get(i).x && yCoord == handler.getWorld().body.get(i).y){
@@ -256,7 +276,7 @@ public class Player {
 		for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
 			for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 				if(playeLocation[i][j]){
-					g.setColor(Color.GREEN);
+					g.setColor(this.color);
 					g.fillRoundRect((i*handler.getWorld().GridPixelsize),
 							(j*handler.getWorld().GridPixelsize),
 							handler.getWorld().GridPixelsize,
@@ -277,6 +297,7 @@ public class Player {
 		g.drawString("Score: " + scoreCounter, 10, 800);
 		g.drawString("Apples eaten: " + applesCounter, 200, 800);
 		g.drawString("Rotten Apples eaten: " + rottenApplesCounter, 400, 800);
+		g.drawString("Level: " + levelCounter, 600, 800);
 
 	}
 
@@ -396,13 +417,13 @@ public class Player {
 		}else {
 			rottenApplesCounter++;
 			handler.getWorld().appleLocation[xCoord][yCoord]=false;
-            handler.getWorld().appleOnBoard=false;
-            scoreCounter=scoreCounter-10;
-            if(!handler.getWorld().body.isEmpty()) {
-            	handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
-            	handler.getWorld().body.removeLast();
-            	
-            }
+			handler.getWorld().appleOnBoard=false;
+			scoreCounter=scoreCounter-10;
+			if(!handler.getWorld().body.isEmpty()) {
+				handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
+				handler.getWorld().body.removeLast();
+				lenght--;
+			}
 		}
 	}
 

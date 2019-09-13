@@ -43,6 +43,7 @@ public class GameSetUp implements Runnable {
 
     //States
     public State gameState;
+    public State gameOverState;
     public State menuState;
     public State pauseState;
 
@@ -86,7 +87,7 @@ public class GameSetUp implements Runnable {
 
         try {
 
-            audioFile = getClass().getResourceAsStream("/music/nature.wav");
+            audioFile = getClass().getResourceAsStream("/music/La serpiente Taka taka.wav");
             audioStream = AudioSystem.getAudioInputStream(audioFile);
             format = audioStream.getFormat();
             info = new DataLine.Info(Clip.class, format);
